@@ -6,11 +6,27 @@ class Book < ApplicationRecord
   validates :relase_date , presence: true
   validate :validate_relase_date
 
+  filterrific(
+    available_filters: %i[sorted_by],
+  )
+
+  scope :sorted_by, lambda { |sort_option|
+  puts "+++++++++++++++++++++++++++++++++++++++"
+  puts sort_option
+  field, direction = sort_option.split(' ')
+  puts field.length
+  puts direction.length
+  order("#{field} #{direction}")
+  puts "+++++++++++++++++++++++++++++++++++++++"
+
+
+  }
+
   def validate_relase_date
     if self.relase_date.present?
       isFuture =  self.relase_date > Time.now
         if isFuture == true
-          errors.add(:age, "Relase Date can't be in future")
+          errors.add(:relase_date, "can't be in future")
         end
     end
   end
