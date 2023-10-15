@@ -3,6 +3,16 @@
     <h1 style="text-align: center; margin: 50px 0;">Our Lovely Authors</h1>
 
   <%= render 'layouts/messages', notice: notice %>
+
+   
+    <div class="text-center">
+        <div class="btn-group" role="group" aria-label="Sort by">
+            <%= link_to "Sort by Name (A-Z)", authors_path(filterrific: { sorted_by: 'name ASC' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Name (Z-A)", authors_path(filterrific: { sorted_by: 'name desc' }), class: "btn btn-secondary" %>
+ 
+        </div>
+    </div>
+
     <table class="table table-striped table-hover">
         <thead> 
             <tr class="table-dark">

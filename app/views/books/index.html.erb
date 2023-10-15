@@ -6,11 +6,24 @@
     <h1 style="text-align: center; margin: 50px 0;">All Publishments</h1>
 
   <%= render 'layouts/messages', notice: notice %>
+ 
+    <div class="text-center">
+        <div class="btn-group" role="group" aria-label="Sort by">
+            <%= link_to "Sort by Name (A-Z)", books_path(filterrific: { sorted_by: 'name ASC' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Name (Z-A)", books_path(filterrific: { sorted_by: 'name desc' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Release Date (Oldest First)", books_path(filterrific: { sorted_by: 'relase_date asc' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Release Date (Newest First)", books_path(filterrific: { sorted_by: 'relase_date desc' }), class: "btn btn-secondary" %>
+        </div>
+    </div>
+
+
+
     <table class="table table-striped table-hover">
         <thead> 
             <tr class="table-dark">
-                <th>Title <button> ^ </button>  </th>
-                <th>Relase Date   <button> ^ </button>  </th>
+                <th>Title   </th>
+                <th>Relase Date     </th>
+ 
                 <th>Author </th>
              
             </tr>
@@ -39,3 +52,5 @@
      <%= link_to "Download", download_path  , class: "btn btn-primary" %>
      </div>
 </div>
+
+ 
