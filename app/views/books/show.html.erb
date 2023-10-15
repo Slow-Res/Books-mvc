@@ -1,0 +1,22 @@
+  <div class="container mt-5">
+    <h1>Show Book</h1>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= @book.name %></h5>
+        <p class="card-text">
+          <strong>Release Date:</strong> <%= @book.relase_date.strftime('%B %d, %Y') %>
+        </p>
+        <p class="card-text">
+          <strong>Author:</strong> <%= @book.author.name %>
+        </p>
+        <p class="card-text">
+          <strong>Author's Email:</strong> <%= @book.author.email %>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <%= link_to 'Back', "/author-books/" , class: 'btn btn-secondary' %>
+    </div>
+  </div>

@@ -1,0 +1,43 @@
+
+
+
+
+<div class="container">
+    <h1 style="text-align: center; margin: 50px 0;">Your Publishments</h1>
+
+  <%= render 'layouts/messages', notice: notice %>
+    <table class="table table-striped table-hover">
+        <thead> 
+            <tr class="table-dark">
+                <th>Title</th>
+                <th>Relase Date </th>
+                <th>Author </th>
+                <th colspan="3">Actions</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+           
+            
+            <% @books.each do |item| %>
+
+                <tr>
+                    <td> <%= item.name  %> </td>
+                    <td><%= item.relase_date  %> </td>
+                    <td><%= item.author.name  %> </td>
+
+                    <td><%= link_to "Show", book_path(item) %></td>
+                    <td><%= link_to "Edit", edit_book_path(item) %></td>
+                    <td><%= link_to "Delete", book_path(item) , method: :delete , data: {confirm: "Are you sure?"} %></td>
+
+                </tr>
+                
+            <% end %>
+    
+            
+        </tbody>
+    
+    </table>
+
+     <%= link_to "Create", new_book_path  , class: "btn btn-primary" %>
+</div>
