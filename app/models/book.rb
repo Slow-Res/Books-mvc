@@ -26,7 +26,7 @@ class Book < ApplicationRecord
     if self.relase_date.present?
       isFuture =  self.relase_date > Time.now
         if isFuture == true
-          errors.add(:age, "Relase Date can't be in future")
+          errors.add(:relase_date, "can't be in future")
         end
     end
   end
