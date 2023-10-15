@@ -35,6 +35,11 @@ class BooksController < ApplicationController
 
  # ============ CREATE - UPDATE -  DELETE =================
 
+ def download
+    @books = Book.all
+    send_data @books.to_csv, filename: "books-#{Date.today}.csv"
+ end
+
  def create
 
   @book = current_author.books.new(book_params)

@@ -5,5 +5,6 @@ Rails.application.routes.draw do
 
   get "/authors/" , to: "authors#index"
   get "/author-books/" , to: "books#books"
+  get "/download/" , to: "books#download"
   root "books#index"
 end
