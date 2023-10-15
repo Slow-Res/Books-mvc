@@ -1,0 +1,37 @@
+
+
+<h1 style="text-align: center; margin: 50px 0;"> <%= title %>  </h1>
+
+<div class="container">
+
+    <%= form_with model: book do |form| %>
+
+
+    <div class="mb-3">
+
+    <%= form.label :name, "Title", class: "form-label" %>
+    <%= form.text_field :name , class: "form-control" %>
+
+    </div>
+
+
+    <div class="mb-3">
+        
+    <%= form.label :relase_date, "Last Name", class: "form-label" %>
+    <%= form.date_field :relase_date , class: "form-control" %>
+
+    </div>
+
+       
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+ 
+
+    <% end %>
+
+
+    <%= render "form_errors" , book: book  %>
+    
+ 
+
+
+</div>

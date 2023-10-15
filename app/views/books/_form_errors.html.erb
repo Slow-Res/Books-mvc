@@ -1,0 +1,15 @@
+
+<div style="display: flex; flex-direction: column; gap : 15px ; margin-top: 50px; width: 50%;">
+<% if book.errors.any? %>
+
+    <% book.errors.full_messages.each do |msg| %>
+
+    <ul class="list-group"> 
+            <li class="list-group-item list-group-item-danger">  <%= msg%> </li>
+    </ul>
+    
+    <% end %>
+    
+
+<% end %>
+</div>
