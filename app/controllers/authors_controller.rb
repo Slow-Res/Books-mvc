@@ -10,22 +10,30 @@ class AuthorsController < ApplicationController
 
 
   def index
-    permitted_params = if params.key?(:filterrific)
-      params.require(:filterrific).permit(:sorted_by)
-    else
-      {}
-    end
+
+
 
     @filterrific = initialize_filterrific(
       Author,
-      permitted_params
+      params[:filterrific],
+      select_options: {
+        sorted_by: Author.options_for_sorted_by,
+      }
     )
 
-    sorting_param = params[:filterrific] ? params[:filterrific][:sorted_by] : 'name desc'
+    sorting_param = params[:filterrific] ? params[:filterrific][:sorted_by] : 'name_asc'
 
-    @authors = @filterrific.find.order(sorting_param) # Use 'order' to sort the results
+    sorting_criteria = {
+      'name_asc' => "name ASC",
+      'name_desc' => "name DESC",
+    }
+
+    sort_by =  sorting_criteria[sorting_param]
+    @authors = @filterrific.find.order(sort_by)
 
     puts @authors.inspect
+
+
 
     render 'authors_data/index'
   end
