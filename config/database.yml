@@ -9,8 +9,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-# default: &default
-#    url: postgres://veevosky1:cbhYyEVkZa28@ep-polished-queen-14646007.us-east-2.aws.neon.tech/neondb 
+ 
 
 development:
   <<: *default
