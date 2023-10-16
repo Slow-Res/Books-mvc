@@ -5,13 +5,24 @@
   <%= render 'layouts/messages', notice: notice %>
 
    
-    <div class="text-center">
-        <div class="btn-group" role="group" aria-label="Sort by">
-            <%= link_to "Sort by Name (A-Z)", authors_path(filterrific: { sorted_by: 'name ASC' }), class: "btn btn-secondary" %>
-            <%= link_to "Sort by Name (Z-A)", authors_path(filterrific: { sorted_by: 'name desc' }), class: "btn btn-secondary" %>
  
-        </div>
-    </div>
+<%= form_for_filterrific @filterrific do |f| %>
+    <div class="grid-x grid-padding-x">
+
+        <div class="cell medium-4">
+        <%= f.label :sorted_by, "Sort by" %>
+        <%= f.select :sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Any' }, class: 'form-control' %>
+
+<%= f.label :search_query, "Search Query" %>
+<%= f.text_field :search_query %>
+
+<%= f.submit "Submit" %>
+
+
+<% end %>
+
+
+
 
     <table class="table table-striped table-hover">
         <thead> 
@@ -23,26 +34,26 @@
             </tr>
         </thead>
         <tbody>
+
+
+            
            
             
+            <%# @authors.includes(:books).each do |item| %>
             <% @authors.each do |item| %>
-
-
             
-            <% if item.books.count > 0 %>
+                <% if item.books.count > 0 %>
 
-                <tr>
+                    <tr>
 
-                <td> <%= item.name  %> </td>
-                <td><%= item.email  %> </td>
-                <td><%= item.books.last.name  %> </td>
+                    <td> <%= item.name  %> </td>
+                    <td><%= item.email  %> </td>
+                    <td><%= item.books.last.name  %> </td>
 
 
-                </tr>
-                
-            <% end %>
-            
-
+                    </tr>
+                    
+                <% end %>
                 
             <% end %>
     

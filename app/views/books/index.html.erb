@@ -7,14 +7,43 @@
 
   <%= render 'layouts/messages', notice: notice %>
  
+<!--   
+
     <div class="text-center">
         <div class="btn-group" role="group" aria-label="Sort by">
-            <%= link_to "Sort by Name (A-Z)", books_path(filterrific: { sorted_by: 'name ASC' }), class: "btn btn-secondary" %>
-            <%= link_to "Sort by Name (Z-A)", books_path(filterrific: { sorted_by: 'name desc' }), class: "btn btn-secondary" %>
-            <%= link_to "Sort by Release Date (Oldest First)", books_path(filterrific: { sorted_by: 'relase_date asc' }), class: "btn btn-secondary" %>
-            <%= link_to "Sort by Release Date (Newest First)", books_path(filterrific: { sorted_by: 'relase_date desc' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Name (A-Z)", books_path(filterrific: { sorted_by: 'name_asc' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Name (Z-A)", books_path(filterrific: { sorted_by: 'name_desc' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Release Date (Oldest First)", books_path(filterrific: { sorted_by: 'release_date asc' }), class: "btn btn-secondary" %>
+            <%= link_to "Sort by Release Date (Newest First)", books_path(filterrific: { sorted_by: 'release_date desc' }), class: "btn btn-secondary" %>
         </div>
     </div>
+
+!-->
+
+ 
+<%= form_for_filterrific @filterrific do |f| %>
+    <div class="grid-x grid-padding-x">
+
+        <div class="cell medium-4">
+        <%= f.label :sorted_by, "Sort by" %>
+        <%= f.select :sorted_by, @filterrific.select_options[:sorted_by], { include_blank: 'Any' }, class: 'form-control' %>
+
+<%= f.label :search_query, "Search Query" %>
+<%= f.text_field :search_query %>
+
+
+
+        
+        <% f.submit "Submit"  %>
+        </div>
+
+    </div>
+       <%= f.submit "Submit"  %>
+<% end %>
+ 
+
+
+ 
 
 
 
@@ -31,7 +60,8 @@
         <tbody>
            
             
-            <% @books.each do |item| %>
+            <%# @books.each do |item| %> 
+            <%  @books.includes(:author).each do |item|  %>
 
                 <tr>
                     <td> <%= item.name  %> </td>
