@@ -7,14 +7,17 @@ class Book < ApplicationRecord
 
 
   filterrific(
-    default_filter_params: { sorted_by: 'name asc' },
+    default_filter_params: { sorted_by: 'name_asc' },
     available_filters: [
       :sorted_by,
       :search_query,
+      :latest_5
     ]
   )
 
-
+  scope :latest_5, -> (_dummy) {
+    order("name desc").limit(5)
+  }
 
   scope :search_query, lambda { |query|
   where("name LIKE  :keyword", keyword: "%#{query}%")
@@ -24,15 +27,18 @@ class Book < ApplicationRecord
 
 
     scope :sorted_by, ->(sort_option) {
-      direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
-      case sort_option.to_s
-      when /^release_date_/
-        order("books.created_at #{direction}")
-      when /^name_/
-        order("books.name #{direction}")
-      else
-        raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
-      end
+
+
+    sorting_criteria = {
+      'name_asc' => "name ASC",
+      'name_desc' => "name DESC",
+      'release_date_asc' => 'relase_date ASC',
+      'release_date_desc' => 'relase_date DESC'
+    }
+    sort_by =  sorting_criteria[sort_option]
+
+    order(sort_by)
+
     }
 
     def self.options_for_sorted_by(sort_option = nil)

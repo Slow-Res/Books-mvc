@@ -8,7 +8,7 @@ class Author < ApplicationRecord
 
 
   filterrific(
-    default_filter_params: { sorted_by: 'name asc' },
+    default_filter_params: { sorted_by: 'name_asc' },
     available_filters: [
       :sorted_by,
       :search_query,
@@ -22,13 +22,17 @@ class Author < ApplicationRecord
 
 
   scope :sorted_by, ->(sort_option) {
-    direction = sort_option =~ /desc$/ ? 'desc' : 'asc'
-    case sort_option.to_s
-    when /^name/
-      order("authors.name #{direction}")
-    else
-      raise(ArgumentError, "Invalid sort option: #{sort_option.inspect}")
-    end
+
+
+  sorting_criteria = {
+    'name_asc' => "name ASC",
+    'name_desc' => "name DESC",
+  }
+
+  sort_by =  sorting_criteria[sort_option]
+  order(sort_by)
+
+
   }
 
 
