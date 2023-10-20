@@ -39,10 +39,10 @@
             
            
             
-            <%# @authors.includes(:books).each do |item| %>
-            <% @authors.each do |item| %>
+            <% @authors.includes(:books).each do |item| %>
+            <%# @authors.each do |item| %>
             
-                <% if item.books.count > 0 %>
+                <% if item.books.any? %>
 
                     <tr>
 

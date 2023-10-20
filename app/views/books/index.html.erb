@@ -20,6 +20,8 @@
 
 !-->
 
+<%= link_to "TOP 5 Books", books_path(filterrific: { latest_5: 1 }), class: "btn btn-secondary" %>
+
  
 <%= form_for_filterrific @filterrific do |f| %>
     <div class="grid-x grid-padding-x">
@@ -79,7 +81,7 @@
     </table>
 
     <div style="margin: 30px 0 ;">
-     <%= link_to "Download", download_path  , class: "btn btn-primary" %>
+     <%= link_to "Download", download_path(request.query_parameters)  , class: "btn btn-primary" %>
      </div>
 </div>
 
