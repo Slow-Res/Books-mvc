@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   validates :name , presence: true , uniqueness: true
   validates :relase_date , presence: true
   validate :validate_relase_date
+  validates :author_id , presence: true
 
 
   filterrific(

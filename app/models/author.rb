@@ -4,7 +4,11 @@ class Author < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :name , presence: true , uniqueness: true
+  validates :email , presence: true , uniqueness: true
+  validates :password , presence: true , length: { minimum: 6 } , on: :create
+  validates :password , length: { minimum: 6 } , allow_blank: true , on: :update
   has_many :books
+  has_many :reviews , through: :books
 
 
   filterrific(
