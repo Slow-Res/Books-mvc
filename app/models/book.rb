@@ -5,6 +5,8 @@ class Book < ApplicationRecord
   validates :relase_date , presence: true
   validate :validate_relase_date
   validates :author_id , presence: true
+  has_many :reviews , dependent: :destroy
+  
 
 
   filterrific(
