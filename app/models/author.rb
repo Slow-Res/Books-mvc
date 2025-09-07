@@ -8,6 +8,7 @@ class Author < ApplicationRecord
   validates :password , presence: true , length: { minimum: 6 } , on: :create
   validates :password , length: { minimum: 6 } , allow_blank: true , on: :update
   has_many :books
+  has_many :reviews , through: :books
 
 
   filterrific(
